@@ -1,0 +1,205 @@
+CREATE TABLE dbo.MOV_INVENTARIOTEST( 
+    CodCia varchar(5) NOT NULL, 
+    CompaniaVenta varchar(5) NOT NULL, 
+    AlmacenVenta varchar(10) NOT NULL, 
+    TipoMovimiento varchar(2) NOT NULL, 
+    TipoDocumento varchar(2) NOT NULL, 
+    NroDocumento varchar(50) NOT NULL, 
+    CodItem2 varchar(50) NOT NULL, 
+    Proveedor varchar(100) NULL, 
+    AlmacenDestino varchar(50) NULL, 
+    Cantidad int NULL, 
+    DocRef1 varchar(50) NULL, 
+    DocRef2 varchar(50) NULL, 
+    DocRef3 varchar(50) NULL, 
+    DocRef4 varchar(50) NULL, 
+    DocRef5 varchar(50) NULL, 
+    FechaTransaccion DATE NULL, 
+
+    -- Definir la clave primaria compuesta
+    CONSTRAINT PK_MOV_INVENTARIOTEST PRIMARY KEY CLUSTERED  
+    ( 
+        CodCia, 
+        CompaniaVenta, 
+        AlmacenVenta, 
+        TipoMovimiento, 
+        TipoDocumento, 
+        NroDocumento, 
+        CodItem2 
+    )
+);
+go
+
+CREATE OR ALTER PROCEDURE SP_GetMovInventarioById
+    @CodCia VARCHAR(5),
+    @CompaniaVenta VARCHAR(5),
+    @AlmacenVenta VARCHAR(10),
+    @TipoMovimiento VARCHAR(2),
+    @TipoDocumento VARCHAR(2),
+    @NroDocumento VARCHAR(50),
+    @CodItem2 VARCHAR(50)
+AS
+BEGIN
+    SELECT 
+        CodCia,
+        CompaniaVenta,
+        AlmacenVenta,
+        TipoMovimiento,
+        TipoDocumento,
+        NroDocumento,
+        CodItem2,
+        Proveedor,
+        AlmacenDestino,
+        Cantidad,
+        DocRef1,
+        DocRef2,
+        DocRef3,
+        DocRef4,
+        DocRef5,
+        FechaTransaccion
+    FROM 
+        dbo.MOV_INVENTARIOTEST
+    WHERE 
+        CodCia = @CodCia AND
+        CompaniaVenta = @CompaniaVenta AND
+        AlmacenVenta = @AlmacenVenta AND
+        TipoMovimiento = @TipoMovimiento AND
+        TipoDocumento = @TipoDocumento AND
+        NroDocumento = @NroDocumento AND
+        CodItem2 = @CodItem2;
+END
+GO
+
+CREATE PROCEDURE SP_InsertMovInventario
+    @CodCia VARCHAR(5),
+    @CompaniaVenta VARCHAR(5),
+    @AlmacenVenta VARCHAR(10),
+    @TipoMovimiento VARCHAR(2),
+    @TipoDocumento VARCHAR(2),
+    @NroDocumento VARCHAR(50),
+    @CodItem2 VARCHAR(50),
+    @Proveedor VARCHAR(100),
+    @AlmacenDestino VARCHAR(50),
+    @Cantidad DECIMAL,
+    @DocRef1 VARCHAR(50),
+    @DocRef2 VARCHAR(50),
+    @DocRef3 VARCHAR(50),
+    @DocRef4 VARCHAR(50),
+    @DocRef5 VARCHAR(50),
+    @FechaTransaccion DATE
+AS
+BEGIN
+    INSERT INTO dbo.MOV_INVENTARIOTEST (
+        CodCia,
+        CompaniaVenta,
+        AlmacenVenta,
+        TipoMovimiento,
+        TipoDocumento,
+        NroDocumento,
+        CodItem2,
+        Proveedor,
+        AlmacenDestino,
+        Cantidad,
+        DocRef1,
+        DocRef2,
+        DocRef3,
+        DocRef4,
+        DocRef5,
+        FechaTransaccion
+    )
+    VALUES (
+        @CodCia,
+        @CompaniaVenta,
+        @AlmacenVenta,
+        @TipoMovimiento,
+        @TipoDocumento,
+        @NroDocumento,
+        @CodItem2,
+        @Proveedor,
+        @AlmacenDestino,
+        @Cantidad,
+        @DocRef1,
+        @DocRef2,
+        @DocRef3,
+        @DocRef4,
+        @DocRef5,
+        @FechaTransaccion
+    );
+	GO
+
+CREATE OR ALTER PROCEDURE dbo.SP_UpdateMovInventario
+    @CodCia VARCHAR(5),
+    @CompaniaVenta VARCHAR(5),
+    @AlmacenVenta VARCHAR(10),
+    @TipoMovimiento VARCHAR(2),
+    @TipoDocumento VARCHAR(2),
+    @NroDocumento VARCHAR(50),
+    @CodItem2 VARCHAR(50),
+    @Proveedor VARCHAR(100),
+    @AlmacenDestino VARCHAR(50),
+    @Cantidad DECIMAL,
+    @DocRef1 VARCHAR(50),
+    @DocRef2 VARCHAR(50),
+    @DocRef3 VARCHAR(50),
+    @DocRef4 VARCHAR(50),
+    @DocRef5 VARCHAR(50),
+    @FechaTransaccion DATE
+AS
+BEGIN
+    -- Actualizar el registro en la tabla MOV_INVENTARIOTEST
+    UPDATE dbo.MOV_INVENTARIOTEST
+    SET 
+        CompaniaVenta = @CompaniaVenta,
+        AlmacenVenta = @AlmacenVenta,
+        TipoMovimiento = @TipoMovimiento,
+        TipoDocumento = @TipoDocumento,
+        NroDocumento = @NroDocumento,
+        CodItem2 = @CodItem2,
+        Proveedor = @Proveedor,
+        AlmacenDestino = @AlmacenDestino,
+        Cantidad = @Cantidad,
+        DocRef1 = @DocRef1,
+        DocRef2 = @DocRef2,
+        DocRef3 = @DocRef3,
+        DocRef4 = @DocRef4,
+        DocRef5 = @DocRef5,
+        FechaTransaccion = @FechaTransaccion
+    WHERE 
+        CodCia = @CodCia AND
+        CompaniaVenta = @CompaniaVenta AND
+        AlmacenVenta = @AlmacenVenta AND
+        TipoMovimiento = @TipoMovimiento AND
+        TipoDocumento = @TipoDocumento AND
+        NroDocumento = @NroDocumento AND
+        CodItem2 = @CodItem2;
+
+    -- Retornar el número de filas afectadas
+    SELECT @@ROWCOUNT AS 'RowsAffected';
+END
+GO
+
+CREATE OR ALTER PROCEDURE dbo.SP_DeleteMovInventario
+    @CodCia VARCHAR(5),
+    @CompaniaVenta VARCHAR(5),
+    @AlmacenVenta VARCHAR(10),
+    @TipoMovimiento VARCHAR(2),
+    @TipoDocumento VARCHAR(2),
+    @NroDocumento VARCHAR(50),
+    @CodItem2 VARCHAR(50)
+AS
+BEGIN
+    -- Intentar eliminar el registro de la tabla MOV_INVENTARIOTEST
+    DELETE FROM dbo.MOV_INVENTARIOTEST
+    WHERE 
+        CodCia = @CodCia AND
+        CompaniaVenta = @CompaniaVenta AND
+        AlmacenVenta = @AlmacenVenta AND
+        TipoMovimiento = @TipoMovimiento AND
+        TipoDocumento = @TipoDocumento AND
+        NroDocumento = @NroDocumento AND
+        CodItem2 = @CodItem2;
+
+    -- Retornar el número de filas afectadas (esto se puede usar en el código para verificar si fue exitoso)
+    SELECT @@ROWCOUNT AS 'RowsAffected';
+END
+GO
