@@ -1,0 +1,89 @@
+﻿@model Dinet.Application.DTOs.MovInventarioDTO
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Editar Movimiento de Inventario";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<!-- Formulario para editar el inventario -->
+<form method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label for="CodCia">Código Compañía</label>
+        <input type="text" class="form-control" id="CodCia" name="CodCia" value="@Model.CodCia" required />
+    </div>
+    <div class="form-group">
+        <label for="CompaniaVenta">Compañía Venta</label>
+        <input type="text" class="form-control" id="CompaniaVenta" name="CompaniaVenta" value="@Model.CompaniaVenta" required />
+    </div>
+    <div class="form-group">
+        <label for="AlmacenVenta">Almacén Venta</label>
+        <input type="text" class="form-control" id="AlmacenVenta" name="AlmacenVenta" value="@Model.AlmacenVenta" required />
+    </div>
+    <div class="form-group">
+        <label for="TipoMovimiento">Tipo Movimiento</label>
+        <input type="text" class="form-control" id="TipoMovimiento" name="TipoMovimiento" value="@Model.TipoMovimiento" required />
+    </div>
+    <div class="form-group">
+        <label for="TipoDocumento">Tipo Documento</label>
+        <input type="text" class="form-control" id="TipoDocumento" name="TipoDocumento" value="@Model.TipoDocumento" required />
+    </div>
+    <div class="form-group">
+        <label for="NroDocumento">Número Documento</label>
+        <input type="text" class="form-control" id="NroDocumento" name="NroDocumento" value="@Model.NroDocumento" required />
+    </div>
+    <div class="form-group">
+        <label for="CodItem2">Código Item</label>
+        <input type="text" class="form-control" id="CodItem2" name="CodItem2" value="@Model.CodItem2" required />
+    </div>
+    <div class="form-group">
+        <label for="Proveedor">Proveedor</label>
+        <input type="text" class="form-control" id="Proveedor" name="Proveedor" value="@Model.Proveedor" />
+    </div>
+    <div class="form-group">
+        <label for="AlmacenDestino">Almacén Destino</label>
+        <input type="text" class="form-control" id="AlmacenDestino" name="AlmacenDestino" value="@Model.AlmacenDestino" />
+    </div>
+    <div class="form-group">
+        <label for="Cantidad">Cantidad</label>
+        <input type="number" class="form-control" id="Cantidad" name="Cantidad" value="@Model.Cantidad" />
+    </div>
+
+
+    <div class="form-group">
+        <label for="Cantidad">Documento 01</label>
+        <input type="text" class="form-control" id="DocRef1" name="DocRef1" value="@Model.DocRef1" />
+    </div>
+
+    <div class="form-group">
+        <label for="Cantidad">Documento 02</label>
+        <input type="text" class="form-control" id="DocRef2" name="DocRef2" value="@Model.DocRef2" />
+    </div>
+
+    <div class="form-group">
+        <label for="Cantidad">Documento 03</label>
+        <input type="text" class="form-control" id="DocRef3" name="DocRef3" value="@Model.DocRef3" />
+    </div>
+
+    <div class="form-group">
+        <label for="Cantidad">Documento 04</label>
+        <input type="text" class="form-control" id="DocRef4" name="DocRef4" value="@Model.DocRef4" />
+    </div>
+
+    <div class="form-group">
+        <label for="Cantidad">Documento 05</label>
+        <input type="text" class="form-control" id="DocRef5" name="DocRef5" value="@Model.DocRef5" />
+    </div>
+
+
+    <div class="form-group">
+        <label for="FechaTransaccion">Fecha Transacción</label>
+        <input type="date" class="form-control" id="FechaTransaccion" name="FechaTransaccion" value="@Model.FechaTransaccion?.ToString("yyyy-MM-dd")" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+    <a href="@Url.Action("Create", "MovInventario")" class="btn btn-secondary">Cancelar</a>
+</form>

@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Dinet.Application.DTOs.MovInventarioDTO>
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = ViewData["Title"] ?? "Default Title"; 
+}
+
+<h1>@ViewData["Title"]</h1> 
+
+<div class="mb-3">
+    <a class="btn btn-primary" href="@Url.Action("Create", "MovInventario")">Crear Movimiento de Inventario</a>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>CodCia</th>
+            <th>CompaniaVenta</th>
+            <th>AlmacenVenta</th>
+            <th>TipoMovimiento</th>
+            <th>TipoDocumento</th>
+            <th>NroDocumento</th>
+            <th>CodItem2</th>
+            <th>Proveedor</th>
+            <th>AlmacenDestino</th>
+            <th>Cantidad</th>
+            <th>FechaTransaccion</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var inventario in Model)
+        {
+            <tr>
+                <td>@inventario.CodCia</td>
+                <td>@inventario.CompaniaVenta</td>
+                <td>@inventario.AlmacenVenta</td>
+                <td>@inventario.TipoMovimiento</td>
+                <td>@inventario.TipoDocumento</td>
+                <td>@inventario.NroDocumento</td>
+                <td>@inventario.CodItem2</td>
+                <td>@inventario.Proveedor</td>
+                <td>@inventario.AlmacenDestino</td>
+                <td>@inventario.Cantidad</td>
+                <td>@inventario.FechaTransaccion?.ToString("yyyy-MM-dd")</td>
+                <td>
+
+                    <a class="btn btn-info" href="@Url.Action("Details", "MovInventario", new { id = inventario.NroDocumento })"> <i class="fas fa-eye"></i>  </a>
+                    <a class="btn btn-warning" href="@Url.Action("Edit", "MovInventario", new { CodCia = inventario.CodCia,
+                                                                                                CompaniaVenta = inventario.CompaniaVenta,
+                                                                                                    AlmacenVenta = inventario.AlmacenVenta,
+                                                                                                    TipoMovimiento = inventario.TipoMovimiento,
+                                                                                                    TipoDocumento = inventario.TipoDocumento,
+                                                                                                    NroDocumento = inventario.NroDocumento,
+                                                                                                    CodItem2 = inventario.CodItem2})"> <i class="fas fa-edit"> </i> </a>
+                    <a class="btn btn-danger" href="@Url.Action("Delete", "MovInventario", new { CodCia = inventario.CodCia,
+                                                                                                CompaniaVenta = inventario.CompaniaVenta,
+                                                                                                    AlmacenVenta = inventario.AlmacenVenta,
+                                                                                                    TipoMovimiento = inventario.TipoMovimiento,
+                                                                                                    TipoDocumento = inventario.TipoDocumento,
+                                                                                                    NroDocumento = inventario.NroDocumento,
+                                                                                                    CodItem2 = inventario.CodItem2
+                                                                                                                                })"> <i class="fas fa-trash"> </i> </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

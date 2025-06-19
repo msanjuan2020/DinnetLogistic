@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Dinet.Application.DTOs.MovInventarioDTO>
+
+@{
+    ViewData["Title"] = "Movimientos de Inventario";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Código Compañía</th>
+            <th>Compañía Venta</th>
+            <th>Almacén Venta</th>
+            <th>Tipo Movimiento</th>
+            <th>Tipo Documento</th>
+            <th>Nro Documento</th>
+            <th>Código Item</th>
+            <th>Proveedor</th>
+            <th>Almacén Destino</th>
+            <th>Cantidad</th>
+            <th>Fecha Transacción</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var mov in Model)
+        {
+            <tr>
+                <td>@mov.CodCia</td>
+                <td>@mov.CompaniaVenta</td>
+                <td>@mov.AlmacenVenta</td>
+                <td>@mov.TipoMovimiento</td>
+                <td>@mov.TipoDocumento</td>
+                <td>@mov.NroDocumento</td>
+                <td>@mov.CodItem2</td>
+                <td>@mov.Proveedor</td>
+                <td>@mov.AlmacenDestino</td>
+                <td>@mov.Cantidad</td>
+                <td>@mov.FechaTransaccion?.ToString("yyyy-MM-dd")</td>
+                <td>
+                    <a href="@Url.Action("Details", "MovInventario", new { id = mov.NroDocumento })" class="btn btn-info">Detalles</a>
+                    <a href="@Url.Action("Edit", "MovInventario", new { id = mov.NroDocumento })" class="btn btn-warning">Editar</a>
+                    <a href="@Url.Action("Delete", "MovInventario", new { id = mov.NroDocumento })" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

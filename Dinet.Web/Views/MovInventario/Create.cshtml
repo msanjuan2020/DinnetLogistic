@@ -1,0 +1,96 @@
+﻿@model Dinet.Application.DTOs.MovInventarioDTO
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = ViewData["Title"] ?? "Default Title";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<!-- Formulario para crear el inventario -->
+<form method="post">
+    <div class="form-group">
+        <label for="CodCia">Código Compañía</label>
+        <select class="form-control" id="CodCia" name="CodCia" required>
+            <option value="">Seleccione una compañía</option>
+            <option value="Cia001" @(Model.CodCia == "Cia001" ? "selected" : "")>Cia001</option>
+            <option value="Cia002" @(Model.CodCia == "Cia002" ? "selected" : "")>Cia002</option>
+            <option value="Cia003" @(Model.CodCia == "Cia003" ? "selected" : "")>Cia003</option>
+            <!-- Puedes agregar más opciones aquí -->
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="CompaniaVenta">Compañía Venta</label>
+        <select class="form-control" id="CompaniaVenta" name="CompaniaVenta" required>
+            <option value="">Seleccione una compañía de venta</option>
+            <option value="Venta001" @(Model.CompaniaVenta == "Venta001" ? "selected" : "")>Venta001</option>
+            <option value="Venta002" @(Model.CompaniaVenta == "Venta002" ? "selected" : "")>Venta002</option>
+            <option value="Venta003" @(Model.CompaniaVenta == "Venta003" ? "selected" : "")>Venta003</option>
+            <!-- Puedes agregar más opciones aquí -->
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="AlmacenVenta">Almacén Venta</label>
+        <select class="form-control" id="AlmacenVenta" name="AlmacenVenta" required>
+            <option value="">Seleccione un almacén de venta</option>
+            <option value="Almacen01" @(Model.AlmacenVenta == "Almacen01" ? "selected" : "")>Almacen01</option>
+            <option value="Almacen02" @(Model.AlmacenVenta == "Almacen02" ? "selected" : "")>Almacen02</option>
+            <option value="Almacen03" @(Model.AlmacenVenta == "Almacen03" ? "selected" : "")>Almacen03</option>
+            <!-- Puedes agregar más opciones aquí -->
+        </select>
+    </div>
+
+
+    <div class="form-group">
+        <label for="TipoMovimiento">Tipo Movimiento</label>
+        <select class="form-control" id="TipoMovimiento" name="TipoMovimiento" required>
+            <option value="">Seleccione un tipo de movimiento</option>
+            <option value="EN" @(Model.TipoMovimiento == "Entrada" ? "selected" : "")>Entrada</option>
+            <option value="SA" @(Model.TipoMovimiento == "Salida" ? "selected" : "")>Salida</option>
+            <option value="TR" @(Model.TipoMovimiento == "Transferencia" ? "selected" : "")>Transferencia</option>
+            <!-- Puedes agregar más opciones aquí -->
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="TipoDocumento">Tipo Documento</label>
+        <select class="form-control" id="TipoDocumento" name="TipoDocumento" required>
+            <option value="">Seleccione un tipo de documento</option>
+            <option value="FA" @(Model.TipoDocumento == "Factura" ? "selected" : "")>Factura</option>
+            <option value="BO" @(Model.TipoDocumento == "Boleta" ? "selected" : "")>Boleta</option>
+            <option value="RE" @(Model.TipoDocumento == "Remito" ? "selected" : "")>Remito</option>
+            <!-- Puedes agregar más opciones aquí -->
+        </select>
+    </div>
+
+
+    <div class="form-group">
+        <label for="NroDocumento">Número Documento</label>
+        <input type="text" class="form-control" id="NroDocumento" name="NroDocumento" value="@Model.NroDocumento" required />
+    </div>
+    <div class="form-group">
+        <label for="CodItem2">Código Item</label>
+        <input type="text" class="form-control" id="CodItem2" name="CodItem2" value="@Model.CodItem2" required />
+    </div>
+    <div class="form-group">
+        <label for="Proveedor">Proveedor</label>
+        <input type="text" class="form-control" id="Proveedor" name="Proveedor" value="@Model.Proveedor" />
+    </div>
+    <div class="form-group">
+        <label for="AlmacenDestino">Almacén Destino</label>
+        <input type="text" class="form-control" id="AlmacenDestino" name="AlmacenDestino" value="@Model.AlmacenDestino" />
+    </div>
+    <div class="form-group">
+        <label for="Cantidad">Cantidad</label>
+        <input type="number" class="form-control" id="Cantidad" name="Cantidad" value="@Model.Cantidad" />
+    </div>
+    <div class="form-group">
+        <label for="FechaTransaccion">Fecha Transacción</label>
+        <input type="date" class="form-control" id="FechaTransaccion" name="FechaTransaccion" value="@Model.FechaTransaccion?.ToString("yyyy-MM-dd")" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Crear</button>
+    <a href="@Url.Action("Index", "MovInventario")" class="btn btn-secondary">Cancelar</a>
+</form>
